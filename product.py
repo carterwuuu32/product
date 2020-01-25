@@ -1,13 +1,18 @@
-#讀取檔案
-products = []
-with open('記帳練習.csv', 'r') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue #繼續，跳到下一回
-		name, price = line.strip().split(',')
-		products.append([name, price])
-print(products)
+import os #operating system
 
+#找有沒有檔案
+products = []
+if os.path.isfile('記帳練習.csv'):
+	print('yeah!')
+	with open('記帳練習.csv', 'r') as f:
+		for line in f:
+			if '商品,價格' in line:
+			    continue #繼續，跳到下一回
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+else:
+	print('找不到檔案')
 
 #使用者輸入
 while True:
@@ -21,6 +26,7 @@ while True:
 for p in products:
 	print(p[0], '的價格是$', p[1])
 
+#寫入檔案
 with open('記帳練習.csv', 'w') as f:   #with可以幫你自動close檔案f
 	f.write('商品,價格\n')
 	for p in products:
