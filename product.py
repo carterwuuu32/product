@@ -1,5 +1,15 @@
-
+#讀取檔案
 products = []
+with open('記帳練習.csv', 'r') as f:
+	for line in f:
+		if '商品,價格' in line:
+			continue #繼續，跳到下一回
+		name, price = line.strip().split(',')
+		products.append([name, price])
+print(products)
+
+
+#使用者輸入
 while True:
 	name = input('請輸入商品名稱: ')
 	if name == 'q':
@@ -7,6 +17,7 @@ while True:
 	price = input('請輸入價格: ')
 	products.append([name, price])
 
+#印出所有購買紀錄
 for p in products:
 	print(p[0], '的價格是$', p[1])
 
